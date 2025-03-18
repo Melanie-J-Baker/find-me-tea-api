@@ -2,6 +2,14 @@ const express = require('express');
 const asyncHandler = require("express-async-handler");
 const router = express.Router();
 
+/* GET request to get Google Maps API Key */
+router.get('/google-maps-api-key', (req, res, next) => {
+  const apiKey = process.env.GOOGLE_API_KEY;
+  res.json({
+    apiKey
+  })
+})
+
 /* POST request for Google Places API data to get nearby tea locations. */
 router.post('/search', asyncHandler(async(req, res, next) => {
   const fetch = (await import('node-fetch')).default; // Dynamically import fetch
@@ -28,6 +36,6 @@ router.post('/search', asyncHandler(async(req, res, next) => {
     })
   }).then((response) => response.json());
   return res.json(response);
-}))
+}));
 
 module.exports = router;
