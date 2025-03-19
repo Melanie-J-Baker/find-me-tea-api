@@ -8,7 +8,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const RateLimit = require("express-rate-limit");
 const cors = require('cors')
-const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/find-me-tea');
 
 const app = express();
 
@@ -25,7 +25,7 @@ const limiter = RateLimit({  // Set up rate limiter: max 20 reqs/min
   max: 20,
 });
 app.use(limiter);  // Apply rate limiter to all reqs
-app.use('/', indexRouter);
+app.use('/find-me-tea', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
